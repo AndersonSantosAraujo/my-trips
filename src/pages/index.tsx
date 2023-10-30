@@ -1,7 +1,7 @@
-import Main from 'components/Main'
+import Map from 'components/Map'
 
 const Home = () => {
-  return <Main />
+  return <Map />
 }
 
 export default Home
