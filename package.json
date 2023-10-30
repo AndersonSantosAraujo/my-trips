@@ -20,12 +20,12 @@
   "dependencies": {
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.0.0",
-    "leaflet": "^1.9.4",
+    "leaflet": "1.7.1",
     "next": "14.0.0",
     "next-pwa": "^5.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-leaflet": "^4.2.1",
+    "react-leaflet": "3.2.5",
     "styled-components": "^6.1.0",
     "webpack": "5"
   },
