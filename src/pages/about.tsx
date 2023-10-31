@@ -1,10 +1,7 @@
 import client from 'graphql/client'
 import { GET_PAGES } from 'graphql/queries'
-import AboutTemplate from 'templates/About'
-
-type Pages = {
-  pages: Page[]
-}
+import { useRouter } from 'next/router'
+import PageTemplate from 'templates/Pages'
 
 type Page = {
   id: string
@@ -16,18 +13,36 @@ type Page = {
 }
 
 export default function AboutPage() {
-  return <AboutTemplate />
+  const router = useRouter()
+
+  // retorna um loading ou outra coisa, enquanto está sendo criado
+  if (router.isFallback) return null
+
+  return <PageTemplate />
 }
 
-export const getStaticProps = async () => {
-  const { pages }: { pages: Pages } = await client.request(GET_PAGES)
+// Gerando as URLS das minhas páginas, mas não o conteúdo
+export async function getStaticPaths() {
+  const { pages }: { pages: Page[] } = await client.request(GET_PAGES, {
+    first: 3
+  })
 
-  console.log(pages)
+  const paths = pages.map(({ slug }) => ({
+    params: { slug }
+  }))
 
-  return {
-    props: {}
-  }
+  return { paths, fallback: true }
 }
+
+// export const getStaticProps = async () => {
+//   const { pages }: { pages: Page[] } = await client.request(GET_PAGES)
+
+//   console.log(pages)
+
+//   return {
+//     props: {}
+//   }
+// }
 
 // MÉTODOS DO NEXTJS
 // getStaticPaths -> gerar as URLS das páginas em build time
