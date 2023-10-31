@@ -6,7 +6,7 @@ import * as S from './styles'
 const AboutTemplate = () => (
   <S.Content>
     <LinkWrapper href="/">
-      <CloseOutline />
+      <CloseOutline size={32} />
     </LinkWrapper>
 
     <S.Heading>My Trips</S.Heading>
