@@ -4,5 +4,8 @@ const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = withPWA({
   dest: 'public',
-  disable: !isProd
+  disable: !isProd,
+  images: {
+    domains: ['media.graphassets.com']
+  }
 })
