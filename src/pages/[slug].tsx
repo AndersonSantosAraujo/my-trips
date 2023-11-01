@@ -1,4 +1,5 @@
 import client from 'graphql/client'
+import { GetPageBySlugQuery, GetPagesQuery } from 'graphql/generated/graphql'
 import { GET_PAGES, GET_PAGE_BY_SLUG } from 'graphql/queries'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
@@ -15,7 +16,7 @@ export default function Page({ heading, body }: PageTemplateProps) {
 
 // Gerando as URLS das minhas páginas, mas não o conteúdo
 export async function getStaticPaths() {
-  const { pages } = await client.request(GET_PAGES, {
+  const { pages } = await client.request<GetPagesQuery>(GET_PAGES, {
     first: 3
   })
 
@@ -26,8 +27,9 @@ export async function getStaticPaths() {
   return { paths, fallback: true }
 }
 
+// Gerando os conteúdos das páginas
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { page } = await client.request(GET_PAGE_BY_SLUG, {
+  const { page } = await client.request<GetPageBySlugQuery>(GET_PAGE_BY_SLUG, {
     slug: `${params?.slug}`
   })
 
