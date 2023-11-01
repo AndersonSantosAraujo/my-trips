@@ -1,4 +1,7 @@
-import React from 'react'
+import { CloseOutline } from '@styled-icons/evaicons-outline'
+import LinkWrapper from 'components/LinkWrapper'
+
+import * as S from './styles'
 
 type ImageProps = {
   url: string
@@ -20,13 +23,25 @@ export type PlacesTemplateProps = {
 const PlacesTemplate = ({ place }: PlacesTemplateProps) => {
   return (
     <>
-      <h1>{place.name}</h1>
+      <LinkWrapper href="/">
+        <CloseOutline size={32} aria-label="Go back to map" />
+      </LinkWrapper>
 
-      <div dangerouslySetInnerHTML={{ __html: place.description.html }} />
+      <S.Wrapper>
+        <S.Container>
+          <S.Heading>{place.name}</S.Heading>
 
-      {place.gallery.map((image, index) => (
-        <img src={image.url} alt={place.name} key={`photo-${index}`} />
-      ))}
+          <S.Body
+            dangerouslySetInnerHTML={{ __html: place.description.html }}
+          />
+
+          <S.Gallery>
+            {place.gallery.map((image, index) => (
+              <img src={image.url} alt={place.name} key={`photo-${index}`} />
+            ))}
+          </S.Gallery>
+        </S.Container>
+      </S.Wrapper>
     </>
   )
 }
