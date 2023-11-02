@@ -25,6 +25,7 @@ export const Body = styled.div`
 
 export const Gallery = styled.div`
   display: grid;
+  gap: 20px;
   margin-top: var(--medium);
 
   img {
